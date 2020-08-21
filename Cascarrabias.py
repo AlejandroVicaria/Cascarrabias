@@ -1,5 +1,6 @@
 import discord
 import random
+import sys
 
 
 BOOMER_FILE = open("boomers.txt", "r")
@@ -14,7 +15,7 @@ else:
 
 try:
     client = discord.Client()
-    TOKEN = open("token.env", "r").readline()
+    TOKEN = sys.argv[1]
 
     @client.event 
     async def on_ready():
