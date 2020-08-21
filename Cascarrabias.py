@@ -2,18 +2,23 @@ import discord
 import random
 
 
+BOOMER_FILE = open("boomers.txt", "r")
+BOOMER_IMGS = BOOMER_FILE.readlines()
+BOOMER_FILE.close()
+
+if len(BOOMER_IMGS) > 0:
+    CHISTES_BOOMERS = True
+else:
+    CHISTES_BOOMERS = False
+
+
 try:
     client = discord.Client()
     TOKEN = open("token.env", "r").readline()
-    BOOMER_FILE = open("boomers.txt", "a+")
-    BOOMER_IMGS = BOOMER_FILE.readlines()
-
-    if len(BOOMER_IMGS) > 0:
-        CHISTES_BOOMERS = True
 
     @client.event 
     async def on_ready():
-        await client.get_channel(688816974947811406).send("A ver... Sonotone, Bastón, Mala ostia... Vale, lo tengo todo listo ya.")
+        await client.get_channel(688816974947811406).send("Estúpidos críos, me han despertado de la siesta jugando al balón.")
 
 
     @client.event
