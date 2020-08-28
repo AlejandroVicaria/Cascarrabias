@@ -76,12 +76,20 @@ class Memoria():
         """
         Limpia todos los datos asociados al usuario especificado de la base de datos.
         """
-        id_usuario = str(id_usuario)
-
-        self.cursor.execute("UPDATE discord_users SET intereses = NULL, gustos = NULL, saludo_personalizado = NULL, cumpleaños = NULL, provincia = NULL WHERE id_usuario = ?", (id_usuario,))
+        self.cursor.execute("UPDATE discord_users SET intereses = NULL, gustos = NULL, saludo_personalizado = NULL, cumpleaños = NULL, provincia = NULL WHERE id_usuario = ?", (str(id_usuario),))
         self.conn.commit()
 
 
+    def add_miembros(self, usuarios):
+        """
+        Guarda todos los ids de los usuarios en la base de datos.
+        """
+        for usuario in usuarios:
+            try:
+                self.cursor.execute("INSERT INTO discord_users (id_usuario) VALUES (?);", (str(usuario), ))
+                self.conn.commit()
+            except sqlite3.IntegrityError:
+                print("[*] Ya existe el usuario en la base de datos.")
 
 
 
